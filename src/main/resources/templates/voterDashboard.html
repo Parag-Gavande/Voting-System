@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voter Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .dashboard-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+        }
+        .dashboard-container h2 {
+            margin-bottom: 20px;
+        }
+        .dashboard-container p {
+            font-size: 18px;
+        }
+        .dashboard-container .logout {
+            margin-top: 20px;
+        }
+        .dashboard-container .logout a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .dashboard-container .logout a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Welcome to Voter Dashboard</h2>
+        <div th:if="${voter != null}">
+            <p>Name: <span th:text="${voter.voterName}">Voter Name</span></p>
+            <p>Date of Birth: <span th:text="${voter.dob}">Date of Birth</span></p>
+            <p>Gender: <span th:text="${voter.gender}">Gender</span></p>
+            <p>Username: <span th:text="${voter.username}">Username</span></p>
+            <p>Your Voter Id: <span th:text="${voter.voterId}">Voter Id</span></p>
+        </div>
+        <h2>Upcoming Elections</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Place</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="election : ${elections}">
+                    <td th:text="${election.name}">Election Name</td>
+                    <td th:text="${election.date}">Date</td>
+                    <td th:text="${election.type}">Type</td>
+                    <td th:text="${election.place}">Place</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="logout">
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
